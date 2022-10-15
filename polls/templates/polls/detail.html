@@ -1,0 +1,22 @@
+{% load tailwind_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% tailwind_css %}
+    <title>Details</title>
+</head>
+<body>
+    <div class="max-w-md mx-auto bg-white py-10 px-10 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+        <h1>{{ question.question_text }}</h1>
+        <ul class= "py-2">
+        {% for choice in question.choice_set.all %}
+            <div class = "px-5 list-disc">
+                <li class="no-underline hover:underline  ">{{ choice.choice_text }}</li>
+            </div>
+        {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
