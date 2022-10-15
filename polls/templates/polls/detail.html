@@ -9,14 +9,25 @@
 </head>
 <body>
     <div class="max-w-md mx-auto bg-white py-10 px-10 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-        <h1>{{ question.question_text }}</h1>
-        <ul class= "py-2">
-        {% for choice in question.choice_set.all %}
-            <div class = "px-5 list-disc">
-                <li class="no-underline hover:underline  ">{{ choice.choice_text }}</li>
-            </div>
-        {% endfor %}
-        </ul>
+        <form action="{% url 'polls:vote' question.id %}" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <legend><h1>{{ question.question_text }}</h1></legend>
+                {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                {% for choice in question.choice_set.all %}
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                {% endfor %}
+            </fieldset>
+      <div class = "py-2">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded-full">
+            <input type="submit" value="Vote">
+          </button>
+      </div>
+           
+            </form>
+           
+            
     </div>
 </body>
 </html>
