@@ -1,0 +1,24 @@
+{% load tailwind_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% tailwind_css %}
+    <title>Polls App</title>
+</head>
+<body>
+    
+    <div class="max-w-md mx-auto bg-white py-10 px-10 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+        {% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li class = "list-disc"><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No polls are available.</p>
+    {% endif %}
+    </div>
+</body>
+</html>
